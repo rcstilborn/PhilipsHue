@@ -40,11 +40,11 @@ If the Green Lamp is then turned on, and dimmed to 75%, you would print two chan
 ```
 
 ## Dependencies
-boost, ssl and gmock for testing
+Developed and tested on ubuntu 16.04, requires: boost, ssl and gmock for testing
 
 
 ## Usage
-'''
+```
 PhilipsHueMonitor -h | --help    : Print usage
 PhilipsHueMonitor <IP address>   : Uses provided address to connect to bridge.
                                    Saves in config.ini if successful
@@ -54,7 +54,7 @@ PhilipsHueMonitor                : Uses address in config.ini if provided and
                                    2. www.meethue.com/api/nupnp
                                       
 Once connected it prints the current lights and polls the bridge every second to detect changes.
-'''
+```
 
 ## Limitations
 1. The tool does not implement the uPnP discovery mechanism
