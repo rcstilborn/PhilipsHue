@@ -16,16 +16,15 @@
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/ini_parser.hpp>
 
+#include "http/HTTP_InterfaceImpl.h"
 #include "BridgeConnection.h"
-#include "http/HTTP_Client.h"
-#include "http/HTTPS_Client.h"
 
 void load_config(const std::string& filename, std::string& ip_address,
                  std::string& username) {
   boost::property_tree::ptree pt;
 
   try {
-    boost::property_tree::ini_parser::read_ini("config.ini", pt);
+    boost::property_tree::ini_parser::read_ini(filename, pt);
     ip_address = pt.get<std::string>("ip_address");
   } catch (...) {  // Either the file doesn't exist or it doesn't have the expected entries so create a new one.
     pt.put("ip_address", "");
@@ -43,12 +42,11 @@ void load_config(const std::string& filename, std::string& ip_address,
   }
 }
 
-std::string discover_bridge() {
-  HTTPS_Client client("www.meethue.com");
+std::string discover_bridge(http::HTTP_Interface& interface) {
   boost::property_tree::ptree pt;
 
   // Query the website - throw if we can't connect
-  if (client.getJSON("/api/nupnp", pt) != 200)
+  if (interface.getJSON("www.meethue.com", "/api/nupnp", pt) != 200)
     throw "Could not connect to www.meethue.com.  Please check your Internet connection";
 
   // Loop through the results and return the first IP address we find
@@ -67,13 +65,14 @@ int main() {
 
   try {
     std::string ip_address, username;
+    http::HTTP_InterfaceImpl interface;
 
     load_config("config.ini", ip_address, username);
 
     if (ip_address.empty())
-      ip_address = discover_bridge();
+      ip_address = discover_bridge(interface);
 
-    BridgeConnection bridge(ip_address, username);
+    BridgeConnection bridge(interface, ip_address, username);
 
   } catch (const std::string& s) {
     std::cerr << s << std::endl;

@@ -21,7 +21,7 @@ HTTP_InterfaceImpl::~HTTP_InterfaceImpl() {}
 
 unsigned int HTTP_InterfaceImpl::get(const std::string& hostname,
                                      const std::string& path,
-                                     boost::asio::streambuf& response) {
+                                     boost::asio::streambuf& response) const {
     HTTP_Client client(hostname);
     try {
       return client.get(path, response);
@@ -31,8 +31,8 @@ unsigned int HTTP_InterfaceImpl::get(const std::string& hostname,
 }
 
 unsigned int HTTP_InterfaceImpl::getS(const std::string& hostname,
-                                     const std::string& path,
-                                     boost::asio::streambuf& response) {
+                                      const std::string& path,
+                                      boost::asio::streambuf& response) const {
     HTTPS_Client client(hostname);
     try {
       return client.get(path, response);
@@ -44,7 +44,7 @@ unsigned int HTTP_InterfaceImpl::getS(const std::string& hostname,
 unsigned int HTTP_InterfaceImpl::post(const std::string& hostname,
                                       const std::string& path,
                                       const std::string& body,
-                                      boost::asio::streambuf& response) {
+                                      boost::asio::streambuf& response) const {
   HTTP_Client client(hostname);
   try {
     return client.post(path, body, response);
@@ -56,7 +56,7 @@ unsigned int HTTP_InterfaceImpl::post(const std::string& hostname,
 unsigned int HTTP_InterfaceImpl::postS(const std::string& hostname,
                                       const std::string& path,
                                       const std::string& body,
-                                      boost::asio::streambuf& response) {
+                                      boost::asio::streambuf& response) const {
   HTTPS_Client client(hostname);
   try {
     return client.post(path, body, response);
@@ -67,7 +67,7 @@ unsigned int HTTP_InterfaceImpl::postS(const std::string& hostname,
 
 unsigned int HTTP_InterfaceImpl::getJSON(const std::string& hostname,
                                          const std::string& path,
-                                         boost::property_tree::ptree& pt) {
+                                         boost::property_tree::ptree& pt) const {
   HTTP_Client client(hostname);
   try {
     return client.getJSON(path, pt);
@@ -78,7 +78,7 @@ unsigned int HTTP_InterfaceImpl::getJSON(const std::string& hostname,
 
 unsigned int HTTP_InterfaceImpl::getSJSON(const std::string& hostname,
                                          const std::string& path,
-                                         boost::property_tree::ptree& pt) {
+                                         boost::property_tree::ptree& pt) const {
   HTTPS_Client client(hostname);
   try {
     return client.getJSON(path, pt);
@@ -90,7 +90,7 @@ unsigned int HTTP_InterfaceImpl::getSJSON(const std::string& hostname,
 unsigned int HTTP_InterfaceImpl::postJSON(const std::string& hostname,
                                           const std::string& path,
                                           const std::string& body,
-                                          boost::property_tree::ptree& pt) {
+                                          boost::property_tree::ptree& pt) const {
   HTTP_Client client(hostname);
   try {
     return client.postJSON(path, body, pt);
@@ -102,7 +102,7 @@ unsigned int HTTP_InterfaceImpl::postJSON(const std::string& hostname,
 unsigned int HTTP_InterfaceImpl::postSJSON(const std::string& hostname,
                                           const std::string& path,
                                           const std::string& body,
-                                          boost::property_tree::ptree& pt) {
+                                          boost::property_tree::ptree& pt) const {
   HTTPS_Client client(hostname);
   try {
     return client.postJSON(path, body, pt);

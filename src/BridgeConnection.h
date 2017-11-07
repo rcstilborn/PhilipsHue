@@ -14,7 +14,7 @@
 
 class BridgeConnection {
  public:
-  BridgeConnection(const ::http::HTTP_Interface& interface, const std::string& ip_address, const std::string& username);
+  BridgeConnection(const http::HTTP_Interface& interface, const std::string& ip_address, const std::string& username);
   virtual ~BridgeConnection();
 
   bool testConnection();
@@ -26,7 +26,7 @@ class BridgeConnection {
   const std::string& getUsername() const { return username_; }
 
  private:
-  const ::http::HTTP_Interface& interface_;
+  const http::HTTP_Interface& interface_;
   std::string ip_address_;
   std::string username_;
 };

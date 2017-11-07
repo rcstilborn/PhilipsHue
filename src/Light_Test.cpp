@@ -32,7 +32,7 @@ BOOST_AUTO_TEST_CASE(OStreamOperator)
   Light light("1",pt);
 
   boost::test_tools::output_test_stream output("test_data/light_white_on.expected", true );
-  output << light;
+  light.getFormattedOutput(output,2);
   BOOST_TEST(output.match_pattern());
 }
 

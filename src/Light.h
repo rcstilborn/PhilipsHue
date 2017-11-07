@@ -10,6 +10,7 @@
 
 #include <string>
 #include <deque>
+#include <ostream>
 #include <boost/property_tree/ptree.hpp>
 
 class Light {
@@ -18,17 +19,17 @@ class Light {
   virtual ~Light();
 
   void updateData(const boost::property_tree::ptree& pt);
-  std::ostream& getUpdates(std::ostream& os);
+  void getFormattedOutput(std::ostream& os, const int indent = 0) const;
+  void getUpdates(std::ostream& os);
   const std::string& getId() const { return id_; }
-  const boost::property_tree::ptree& getData() const { return data_; }
 
  private:
   std::string id_;
   boost::property_tree::ptree data_;
   std::deque<std::string> updates_;
 
+  friend std::ostream& operator<<(std::ostream& os, const Light& l);
 };
 
-std::ostream& operator<<(std::ostream& os, const Light& l);
 
 #endif /* LIGHT_H_ */

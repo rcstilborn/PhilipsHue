@@ -14,7 +14,7 @@
 
 #include "http/HTTP_Client.h"
 
-BridgeConnection::BridgeConnection(const ::http::HTTP_Interface& interface,
+BridgeConnection::BridgeConnection(const http::HTTP_Interface& interface,
                                    const std::string& ip_address,
                                    const std::string& username)
     : interface_(interface),

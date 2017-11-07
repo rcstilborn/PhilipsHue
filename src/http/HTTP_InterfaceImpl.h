@@ -24,31 +24,30 @@ class HTTP_InterfaceImpl : public HTTP_Interface {
                    const std::string& path,
                    boost::asio::streambuf& response) const override;
   unsigned int getS(const std::string& hostname,
-                   const std::string& path,
-                   boost::asio::streambuf& response) const override;
+                    const std::string& path,
+                    boost::asio::streambuf& response) const override;
   unsigned int post(const std::string& hostname,
                     const std::string& path,
                     const std::string& body,
                     boost::asio::streambuf& response) const override;
   unsigned int postS(const std::string& hostname,
-                    const std::string& path,
-                    const std::string& body,
-                    boost::asio::streambuf& response) const override;
+                     const std::string& path,
+                     const std::string& body,
+                     boost::asio::streambuf& response) const override;
   unsigned int getJSON(const std::string& hostname,
                        const std::string& path,
                        boost::property_tree::ptree& pt) const override;
   unsigned int getSJSON(const std::string& hostname,
-                       const std::string& path,
-                       boost::property_tree::ptree& pt) const override;
+                        const std::string& path,
+                        boost::property_tree::ptree& pt) const override;
   unsigned int postJSON(const std::string& hostname,
                         const std::string& path,
                         const std::string& body,
                         boost::property_tree::ptree& pt) const override;
   unsigned int postSJSON(const std::string& hostname,
-                        const std::string& path,
-                        const std::string& body,
-                        boost::property_tree::ptree& pt) const override;
-
+                         const std::string& path,
+                         const std::string& body,
+                         boost::property_tree::ptree& pt) const override;
 };
 
 } /* namespace http */
