@@ -44,13 +44,19 @@ boost, sll and gmock for testing
 
 
 ## Usage
-PhilipsHueMonitor --help            : Print usage
-PhilipsHueMonitor --ip <IP address> : Uses provided address to connect to bridge.
-                                      Saves in config.ini if successful
-PhilipsHueMonitor                   : Uses address in config.ini if provided and 
-                                      successful otherwise tries to discover bridge via:
-                                      1. uPnP (note: not yet implemented!!)
-                                      2. www.meethue.com/api/nupnp
+'''
+PhilipsHueMonitor -h | --help    : Print usage
+PhilipsHueMonitor <IP address>   : Uses provided address to connect to bridge.
+                                   Saves in config.ini if successful
+PhilipsHueMonitor                : Uses address in config.ini if provided and 
+                                   successful otherwise tries to discover bridge via:
+                                   1. uPnP (note: not yet implemented!!)
+                                   2. www.meethue.com/api/nupnp
                                       
 Once connected it prints the current lights and polls the bridge every second to detect changes.
-                                      
+'''
+
+## Limitations
+1. The tool does not implement the uPnP discovery mechanism
+2. This has only been tested against Bridge API version 1.21.0
+3. The default (long) timeout is used for socket connections

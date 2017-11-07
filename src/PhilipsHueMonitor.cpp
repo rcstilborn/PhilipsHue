@@ -76,7 +76,7 @@ int main(int argc, char *argv[]) {
     }
   }
 
-  std::cout << "Attempting to connect to " << ip_address << " ... ";
+  std::cout << "Attempting to connect to " << ip_address << " ... " << std::flush;
   BridgeConnection bridge(interface, ip_address, username);
   if (!bridge.testConnection()) {
     std::cerr
