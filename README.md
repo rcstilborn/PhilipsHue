@@ -40,7 +40,7 @@ If the Green Lamp is then turned on, and dimmed to 75%, you would print two chan
 ```
 
 ## Dependencies
-boost, sll and gmock for testing
+boost, ssl and gmock for testing
 
 
 ## Usage
