@@ -28,7 +28,8 @@ struct InitGMock {
 };
 BOOST_GLOBAL_FIXTURE(InitGMock);
 
-BOOST_AUTO_TEST_SUITE (PhilipsHueMonitor_Test)
+// This test suite is disabled because most testcases need to connect to to a live bridge!
+BOOST_AUTO_TEST_SUITE (PhilipsHueMonitor_Test, * boost::unit_test::disabled())
 
 const std::string kTestFileName = "testfilename.ini";
 
