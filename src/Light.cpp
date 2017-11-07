@@ -23,7 +23,7 @@ void Light::updateData(const boost::property_tree::ptree& pt) {
   if (data_.get("state.on","") != pt.get("state.on",""))
     updates_.emplace_back("{\n  \"id\":\""+id_+"\",\n  \"on\":"+pt.get("state.on","")+"\n}");
   if (data_.get("state.bri","") != pt.get("state.bri",""))
-    updates_.emplace_back("{\n  \"id\":\""+id_+"\",\n  \"brightness\":"+pt.get("state.bri","")+"\n}");
+    updates_.emplace_back("{\n  \"id\":\""+id_+"\",\n  \"brightness\":"+convertBrightnessToPercent(pt.get("state.bri",""))+"\n}");
   data_ = pt;
 }
 
@@ -42,8 +42,14 @@ void Light::getFormattedOutput(std::ostream& os, const int indent) const
   os << prefix << "  \"name\":\"" << data_.get("name","") << "\",\n";
   os << prefix << "  \"id\":\"" << id_ << "\",\n";
   os << prefix << "  \"on\":" << data_.get("state.on","") << ",\n";
-  os << prefix << "  \"brightness\":" << data_.get("state.bri","") << "\n";
+  os << prefix << "  \"brightness\":" << convertBrightnessToPercent(data_.get("state.bri","")) << "\n";
   os << prefix << "}";
+}
+
+const std::string Light::convertBrightnessToPercent(const std::string& bri) const {
+  if (bri.empty()) return "";
+  unsigned int b = std::stoi(bri);
+  return std::to_string((int)(b/2.54));
 }
 
 std::ostream& operator<<(std::ostream& os, const Light& l)

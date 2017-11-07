@@ -78,6 +78,6 @@ void LightManager::getUpdates(std::ostream& os) {
 
 std::ostream& operator<<(std::ostream& os, const LightManager& lm) {
   for(const auto& item : lm.lights_)
-    os << item.second;
+    os << "\"" << item.first << "\":" << item.second;
   return os;
 }

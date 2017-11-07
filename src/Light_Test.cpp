@@ -22,7 +22,9 @@ BOOST_AUTO_TEST_CASE (CTor)
   boost::property_tree::json_parser::read_json("test_data/light_white_on.json", pt);
   Light light("1",pt);
   BOOST_CHECK(light.getId() == "1");
-  BOOST_CHECK(light.getData() == pt);
+  boost::test_tools::output_test_stream output("test_data/light_white_on.json", true );
+  output << light;
+  BOOST_TEST(output.match_pattern());
 }
 
 BOOST_AUTO_TEST_CASE(OStreamOperator)
@@ -44,7 +46,9 @@ BOOST_AUTO_TEST_CASE (UpdateData)
   boost::property_tree::json_parser::read_json("test_data/light_white_off.json", pt);
   light.updateData(pt);
   BOOST_CHECK(light.getId() == "1");
-  BOOST_CHECK(light.getData() == pt);
+  boost::test_tools::output_test_stream output("test_data/light_white_off.json", true );
+  output << light;
+  BOOST_TEST(output.match_pattern());
 }
 
 BOOST_AUTO_TEST_CASE (UpdateDataOuput)

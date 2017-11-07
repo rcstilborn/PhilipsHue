@@ -3,12 +3,12 @@
     "name":"Hue color lamp 1",
     "id":"1",
     "on":true,
-    "brightness":254
+    "brightness":100
   },
   {
     "name":"Hue white lamp 1",
     "id":"2",
     "on":true,
-    "brightness":254
+    "brightness":100
   }
 ]

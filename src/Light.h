@@ -28,6 +28,8 @@ class Light {
   boost::property_tree::ptree data_;
   std::deque<std::string> updates_;
 
+  const std::string convertBrightnessToPercent(const std::string& bri) const;
+
   friend std::ostream& operator<<(std::ostream& os, const Light& l);
 };
 

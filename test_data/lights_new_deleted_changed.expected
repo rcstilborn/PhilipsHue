@@ -4,12 +4,12 @@
 }
 {
   "id":"1",
-  "brightness":128
+  "brightness":50
 }
 {
   "name":"Hue white lamp 2",
   "id":"3",
   "on":true,
-  "brightness":254
+  "brightness":100
 }
 Deleted light 2
