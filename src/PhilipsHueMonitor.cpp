@@ -1,10 +1,11 @@
-//============================================================================
-// Name        : PhilipsHue.cpp
-// Author      : Richard Stilborn
-// Version     :
-// Copyright   : Your copyright notice
-// Description : Command line tool to observe Philips Hue lights
-//============================================================================
+/*
+ * PhilipsHueMonitor.cpp
+ *
+ *  Created on: Nov 4, 2017
+ *      Author: richard
+ *
+ * Description : Command line tool to observe Philips Hue lights
+ */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -52,6 +53,7 @@ int main(int argc, char *argv[]) {
   std::string ip_address, username;
   http::HTTP_InterfaceImpl interface;
 
+  // Try to get the ip address of the bridge from the command line or config file
   if (argc == 2) {
     if (isValidIpAddress(argv[1])) {
       ip_address = argv[1];
@@ -66,6 +68,8 @@ int main(int argc, char *argv[]) {
     std::cout << "Loading configuration from file" << std::endl;
     load_config(ip_address, username);
   }
+
+  // If we still don't have it discover the bridge ip address
   if (ip_address.empty()) {
     // Do discovery!
     try {
@@ -76,6 +80,7 @@ int main(int argc, char *argv[]) {
     }
   }
 
+  // Check the connection
   std::cout << "Attempting to connect to " << ip_address << " ... " << std::flush;
   BridgeConnection bridge(interface, ip_address, username);
   if (!bridge.testConnection()) {
@@ -87,6 +92,7 @@ int main(int argc, char *argv[]) {
   }
   std::cout << "Connected." << std::endl;
 
+  // Check the username, get a new one if needed.
   if (!username.empty() && bridge.verifyUser()) {
     std::cout << "Username verified." << std::endl;
   } else {
@@ -100,8 +106,11 @@ int main(int argc, char *argv[]) {
     }
   }
   username = bridge.getUsername();
+
+  // Save what we have for next time
   save_config(ip_address, username);
 
+  // Get the initial set of lights
   LightManager lm;
   boost::property_tree::ptree pt;
   if (!bridge.getLights(pt)) {
@@ -112,6 +121,7 @@ int main(int argc, char *argv[]) {
   lm.loadLights(pt);
   lm.getFormattedOutput(std::cout);
 
+  // Keep looking for changes
   while (true) {
     std::this_thread::sleep_for(std::chrono::milliseconds(1000));
     if (!bridge.getLights(pt)) {
